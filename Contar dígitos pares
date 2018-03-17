@@ -1,0 +1,20 @@
+#include "stdafx.h"
+#include <conio.h>
+#include <iostream>
+
+using namespace std;
+ 
+void main()
+ {  int n, z=0, a, b=0;
+	 cout<< "\t introduzca un numero entero: ";
+	 cin>>n;
+	 while(n>0)
+	 {   a=n%10;
+	     if (a%2==0)
+	     {   b=b+1;
+	     }
+	     n=n/10;
+    }
+	 cout<<"\n\t La cantidad de digitos pares es: "<<b;
+	 getch();
+ }
