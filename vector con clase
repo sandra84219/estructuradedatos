@@ -1,0 +1,138 @@
+vector.h
+
+#pragma once
+class vector
+{
+private:
+	
+	int v[10];
+	int dim;
+
+public:
+	vector(void);
+	~vector(void);
+	void crearvector(int v[],int dim);
+	void mostrarvector(int v[],int dim);
+	void numeromayor(int v[],int dim);
+	void ordenarvector(int v[],int dim);
+};
+
+#include "StdAfx.h"
+#include "vector.h"
+#include <iostream>
+using namespace std;
+
+vector.cpp
+
+vector::vector(void)
+{
+	 v[10]=0;
+	 dim=0;
+
+}
+
+
+vector::~vector(void)
+{
+}
+void vector::crearvector(int v[],int dim){
+	int i;
+	for (i=0;i<dim;i++){
+		cout<<"ingrese variables del vector: ";
+		cin>>v[i];
+	}
+
+}
+void vector::mostrarvector(int v[],int dim){
+	int i;
+	for(i=0;i<dim;i++){
+		cout<<v[i]<<" ";
+	}
+
+}
+void vector::numeromayor(int v[],int dim){
+	int i;
+	int max;
+	int p;
+	max=v[0];
+	for(i=0;i<dim;i++){
+		if(max<v[i]){
+			max=v[i];
+			p=i;
+		}
+	}
+	cout<<"el numero mayor es: "<<max;
+	cout<<endl;
+	cout<<"el numero mayor se encuentra en la celda: "<<p;
+
+}
+void vector::ordenarvector(int v[],int dim){
+	int i;
+	int j;
+	int aux;
+	
+	for(i=0;i<(dim-1);i++){
+		for(j=1;j<dim;j++){
+			if(v[i] < v[j]){
+				aux=v[i];
+				v[i]=v[j];
+				v[j]=aux;
+			}
+		}
+	}
+}
+
+ejemplo.cpp
+
+#include "stdafx.h"
+#include "vector.h"
+#include <conio.h>
+#include <iostream>
+using namespace std;
+#define MAX 20
+
+
+
+void main()
+{
+	int opcion;
+	int v[MAX];
+	int dim;
+	vector numero;
+
+	cout<<"ingrese dimension del vector: ";
+	cin>>dim;
+	do{
+		do{
+			cout<<"--MENU--"<<endl;
+			cout<<"1.Crear vector"<<endl;
+			cout<<"2.Mostrar vector"<<endl;
+			cout<<"3.Numero mayor del vector y posicion"<<endl;
+			cout<<"4.Ordenar vector"<<endl;
+			cout<<"0.Salir"<<endl;
+			cin>>opcion;
+		}while(!(opcion>=0 && opcion<=4));
+
+		switch(opcion){
+		case 1:
+			numero.crearvector(v,dim);
+			cout<<endl;
+			break;
+		case 2:
+			numero.mostrarvector(v,dim);
+			cout<<endl;
+			break;
+		case 3:
+			numero.numeromayor(v,dim);
+			cout<<endl;
+			break;
+		case 4:
+			numero.ordenarvector(v,dim);
+			cout<<endl;
+			break;
+		}	
+	}while(!(opcion==0));
+
+	getch();
+}
+
