@@ -1,0 +1,55 @@
+#include "stdafx.h"
+#include <conio.h>
+#include <iostream>
+#define max 20
+using namespace std;
+void cargarvector (int v[max], int dim);
+void mostrarvector (int v[max], int dim);
+bool capicua (int v[max], int dim);
+void main () {
+	int v[max];
+	int dim;
+	cout<<"ingrese la dimension del vector"<<endl;
+	cin>>dim;
+	cargarvector (v,dim);
+	mostrarvector (v,dim);
+	capicua (v,dim);
+	cout<<endl;
+	getch ();
+
+}
+void cargarvector (int v[max], int dim){
+	int i;
+	for (i=0; i<dim; i++){
+		cout<<"numero: ";
+		cin>>v[i];
+	}
+}
+void mostrarvector (int v[max], int dim){
+	int i;
+	for (i=0; i<dim; i++){
+		cout<<v[i]<<" ";
+	}
+}
+bool capicua (int v[max], int dim){
+	int va[max];
+	int i,j;
+	j=dim-1;
+	bool capicua= true;
+	for (i=0; i<dim; i++){
+		va[j]=v[i];
+		j--;
+	}
+	i=0;
+	while (i<dim && capicua==true){
+		if (v[i]!=va[i]){
+			capicua=false;
+		}
+		i++;
+	}
+	if (capicua == true){
+		cout<<"el vector es capicua"<<endl;
+	}else
+		cout<<"no capicua";
+	return (capicua);
+}
