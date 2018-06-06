@@ -1,0 +1,45 @@
+#include "stdafx.h"
+#include <conio.h>
+#include <iostream>
+#define max 20
+using namespace std;
+void cargarvector (int va[max], int n);
+void mostrarvector (int va[max], int n);
+int invertirvector (int va[max], int n, int vb[max]);
+void main () {
+	int va[max];
+	int vb[max];
+	int n;
+	cout<<"ingrese la dimension del vector";
+	cin>>n;
+	cargarvector (va, n);
+	mostrarvector (va, n);
+	cout<<endl;
+	invertirvector (va, n, vb);
+	mostrarvector (vb,n);
+	getch ();
+}
+void cargarvector (int va[max], int n){
+	int i;
+	for (i=0; i<n; i++){
+		cout<<"numero: ";
+		cin>>va[i];
+	}
+}
+void mostrarvector (int va[max], int n){
+	int i;
+	for (i=0; i<n; i++){
+	cout<<va[i]<<"  ";
+	}
+}
+int invertirvector (int va[max], int n, int vb[max]){
+
+	int i,aux;
+	int j;
+	j=n-1;
+	for (i=0; i<n; i++){
+		vb[j]=vb[i];
+		j--;
+	}
+	return (0);
+}
