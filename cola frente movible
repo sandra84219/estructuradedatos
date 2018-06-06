@@ -1,0 +1,214 @@
+
+FrenteMCOLA.h
+
+#pragma once
+class FMCOLAS
+{
+private:
+	int frente;
+	int final;
+	int vc[5];
+public:
+	FMCOLAS(void);
+	~FMCOLAS(void);
+	void push(int dato);
+	int pop();
+	bool vacio();
+	bool lleno();
+	void mostrarfrente();
+	void mostrarfinal();
+	void mostrarcola();
+	int buscar(int n);
+};
+
+
+------------------------------------------
+FrenteMCOLA.CPP
+
+#include "StdAfx.h"
+#include "FMCOLA.h"
+#include <iostream>
+#define MAX 5
+
+using namespace std;
+
+FMCOLAS::FMCOLAS(void)
+{
+	frente=-1;
+	final=-1;
+}
+
+
+FMCOLAS::~FMCOLAS(void)
+{
+}
+void FMCOLAS::push(int dato){
+	int i;
+	if(final==MAX-1){
+		for(i=frente;i<=final;i++){
+			vc[i-frente]=vc[i];
+		}
+		final=final-frente;
+		frente=0;
+	}
+		if(lleno()==false){
+			if(vacio()==true){
+				frente++; 
+			}
+			final++;
+			vc[final]=dato;
+		}else{
+			cout<<"COLA LLENA";
+		}
+}
+int FMCOLAS::pop(){
+	int dato=-1;
+	if(vacio()==false){
+		dato=vc[frente];
+		frente++;
+		if(frente>final){
+			frente=-1;
+			final=-1;
+		}
+	}else{
+		cout<<"COLA VACIA"<<endl;
+	}
+	return(dato);
+}
+bool FMCOLAS::vacio(){
+	return(frente==-1 && final==-1);
+}
+bool FMCOLAS::lleno(){
+	return(frente==0 && final==MAX-1);
+}
+void FMCOLAS::mostrarfrente(){
+	if(vacio()==false){
+		cout<<vc[frente];
+	}
+}
+void FMCOLAS::mostrarfinal(){
+	if(vacio()==false){
+		cout<<vc[final];
+	}
+}
+void FMCOLAS::mostrarcola(){
+	int i;
+	if(vacio()==false){
+		for(i=frente;i<=final;i++){
+			cout<<vc[i] <<" - "<< i << endl;
+		}
+	}
+}
+int FMCOLAS::buscar(int n){
+	int i;
+	int posicion=-1;
+	i=frente;
+	while(i<=final && posicion==-1){
+		if(n==vc[i]){
+			posicion=i;
+		} 
+		i++;
+	}
+	/*for(i=frente;i<=final;i++){
+		if(n==vc[i]){
+		 posicion=i;
+		}
+	}*/
+	return (posicion);
+}
+
+
+---------------------------------
+FRENTEMOVIBLE.cpp
+
+#include "StdAfx.h"
+#include "FMCOLA.h"
+#include <iostream>
+#define MAX 5
+
+using namespace std;
+
+FMCOLAS::FMCOLAS(void)
+{
+	frente=-1;
+	final=-1;
+}
+
+
+FMCOLAS::~FMCOLAS(void)
+{
+}
+void FMCOLAS::push(int dato){
+	int i;
+	if(final==MAX-1){
+		for(i=frente;i<=final;i++){
+			vc[i-frente]=vc[i];
+		}
+		final=final-frente;
+		frente=0;
+	}
+		if(lleno()==false){
+			if(vacio()==true){
+				frente++; 
+			}
+			final++;
+			vc[final]=dato;
+		}else{
+			cout<<"COLA LLENA";
+		}
+}
+int FMCOLAS::pop(){
+	int dato=-1;
+	if(vacio()==false){
+		dato=vc[frente];
+		frente++;
+		if(frente>final){
+			frente=-1;
+			final=-1;
+		}
+	}else{
+		cout<<"COLA VACIA"<<endl;
+	}
+	return(dato);
+}
+bool FMCOLAS::vacio(){
+	return(frente==-1 && final==-1);
+}
+bool FMCOLAS::lleno(){
+	return(frente==0 && final==MAX-1);
+}
+void FMCOLAS::mostrarfrente(){
+	if(vacio()==false){
+		cout<<vc[frente];
+	}
+}
+void FMCOLAS::mostrarfinal(){
+	if(vacio()==false){
+		cout<<vc[final];
+	}
+}
+void FMCOLAS::mostrarcola(){
+	int i;
+	if(vacio()==false){
+		for(i=frente;i<=final;i++){
+			cout<<vc[i] <<" - "<< i << endl;
+		}
+	}
+}
+int FMCOLAS::buscar(int n){
+	int i;
+	int posicion=-1;
+	i=frente;
+	while(i<=final && posicion==-1){
+		if(n==vc[i]){
+			posicion=i;
+		} 
+		i++;
+	}
+	/*for(i=frente;i<=final;i++){
+		if(n==vc[i]){
+		 posicion=i;
+		}
+	}*/
+	return (posicion);
+}
