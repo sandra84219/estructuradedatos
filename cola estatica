@@ -1,0 +1,148 @@
+
+cola.h
+
+#pragma once
+class colas
+{
+private:
+	int frente;
+	int final;
+	int vc[5];
+public:
+	colas (void);
+	~colas (void);
+	void insertar (int n);
+	int  eliminar ();
+	bool vacio ();
+	bool lleno ();
+	void mfrente ();
+	void mfinal ();
+	void mostrar ();
+};
+
+-------------------------------------------------------------
+
+cola.cpp
+
+#include "stdafx.h"
+#include "cola.h"
+#include <iostream>
+#define max 5
+using namespace std;
+
+colas::colas(void)
+{
+	frente=-1;
+	final=-1;
+}
+colas::~colas(void)
+{
+}
+void colas::insertar (int n){
+	if (lleno()==false){
+		if(vacio()==true){
+			frente++;
+		}
+		final++;
+		vc[final]=n;
+	}else{
+		cout<<"Error cola llena"<<endl;
+	}
+}
+int  colas::eliminar (){
+	int n,i;
+	if (vacio()==false){
+		n=vc[frente];
+		for (i=frente; i<final; i++){
+			vc[i]=vc[i+1];
+		}
+		final--;
+	}else{
+		cout<<"Error cola vacia"<<endl;
+	}
+	return (n);
+}
+bool colas::vacio (){
+	return (frente==-1 && final==-1);
+}
+bool colas::lleno (){
+	return (frente==0 && final==max-1);
+}
+void colas::mfrente (){
+	if(vacio()==false){
+	cout<<"El frente es: "<<vc[frente]<<endl;
+	}
+}
+void colas::mfinal (){
+	if (vacio()==false){
+	cout<<"El final es: "<<vc[final]<<endl;
+	}
+}
+void colas::mostrar (){
+	int i;
+	for (i=frente; i<=final; i++){
+		cout<<vc[i]<<"   "<<"["<<i<<"]"<<endl;
+	}
+}
+
+-------------------------------------------------------------------
+
+
+ejemplocolafija
+
+#include "stdafx.h"
+#include "cola.h"
+#include <conio.h>
+#include <iostream>
+using namespace std;
+
+void main (){
+	colas cola;
+	int op,dato;
+	do{
+		do{
+			cout<<endl;
+			cout<<"1. insertar"<<endl;
+			cout<<"2. eliminar"<<endl;
+			cout<<"3. mostrar"<<endl;
+			cout<<"4. frente"<<endl;
+			cout<<"5. final"<<endl;
+			cout<<"6. vacio"<<endl;
+			cout<<"7. lleno"<<endl;
+			cout<<"0. salir "<<endl;
+			cout<<"ingrese una opcion"<<endl;
+			cin>>op;
+		}while(!(op>=0 && op<=7));
+		switch (op)
+		{
+		case 1:
+			cout<<"ingrese un numero: ";
+			cin>>dato;
+			cola.insertar(dato);
+			break;
+		case 2:
+			cout<<"el valor recuperado es: "<<cola.eliminar();
+			break;
+		case 3:
+			cola.mostrar();
+			break;
+		case 4:
+			cola.mfrente();
+			break;
+		case 5:
+			cola.mfinal();
+			break;
+		case 6:
+			if (cola.vacio()==true){
+				cout<<"cola vacia"<<endl;
+			}
+			break;
+		case 7:
+			if (cola.lleno()==true){
+				cout<<"cola llena"<<endl;
+			}
+			break;
+		}
+	}while(op!=0);
+	getch ();
+}
