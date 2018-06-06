@@ -1,0 +1,152 @@
+pila.h
+
+#pragma once 
+cola.h
+
+#pragma once
+class circular
+{
+private:
+	int frente;
+	int final;
+	int vc[5];
+public:
+	circular(void);
+	~circular(void);
+	void push(int dato);
+	int pop();
+	bool vacio();
+	bool lleno();
+	void mostrarcola();
+	int buscar(int n);
+};
+
+--------------------------------------
+
+cola.cpp
+
+#include "StdAfx.h"
+#include "cola.h"
+#include <iostream>
+#define MAX 3
+
+using namespace std;
+
+circular::circular(void)
+{
+	frente=-1;
+	final=-1;
+}
+
+
+circular::~circular(void)
+{
+}
+void circular::push(int dato){
+	if(lleno()==false){
+		if(frente==-1){
+			frente++;
+		}
+		final=((final+1)%MAX);
+		vc[final]=dato;
+	}else{
+		cout<<"error la cola se encuentra llena"<<endl;
+	}
+}
+int circular::pop(){
+	int dato;
+	if(vacio()==false){
+		dato=vc[frente];
+		frente=((frente+1)%MAX);
+		if(((final+1)%MAX)==frente){
+			frente=-1;
+			final=-1;
+		}
+	}else{
+		cout<<"La cola se encuentra vacia"<<endl;
+	}
+	return(dato);
+}
+bool circular::vacio(){
+	return(frente==-1 && final==-1);
+}
+bool circular::lleno(){
+	return(frente==((final+1)%MAX));
+}
+void circular::mostrarcola(){
+	int i;
+	if(vacio()==false){
+		i=frente;
+		while(i!=final){
+			cout<<vc[i] <<"  ["<< i <<"]"<<endl;
+			i=((i+1)%MAX);
+		}
+		cout<<vc[final] <<"  ["<< final <<"]"<<endl;;
+	}else{
+		cout<<"la cola se encuentra vacia"<<endl;
+	}	
+}
+int circular::buscar(int n){
+	int i;
+	int posicion=-1;
+	i=frente;
+	while(i<=final && posicion==-1){
+		if(n==vc[i]){
+			posicion=i;
+		} 
+		i++;
+	}
+	/*for(i=frente;i<=final;i++){
+		if(n==vc[i]){
+		 posicion=i;
+		}
+	}*/
+	return (posicion);
+}
+
+----------------------------------
+colacircular.cpp
+
+#include "stdafx.h"
+#include "cola.h"
+#include <iostream>
+#include <conio.h>
+using namespace std;
+void main (){
+	int op,n;
+	circular colas;
+	do{
+		do{
+			cout<<endl;
+			cout<<"1. insertar"<<endl;
+			cout<<"2. eliminar"<<endl;
+			cout<<"3. mostrar"<<endl;
+			cout<<"4. vacio"<<endl;
+			cout<<"5. lleno"<<endl;
+			cout<<"0. salir"<<endl;
+			cout<<"elija una opcio"<<endl;
+			cin>>op;
+		}while (!(op>=0 && op<=5)); 
+		switch (op){
+		case 1:
+			if(colas.lleno()==false){
+				cout<<"ingrese un numero: ";
+				cin>>n;
+				colas.push(n);
+			}else{
+				cout<<"la cola se encuentra llena"<<endl;
+			}
+			break;
+		case 2:
+			if(colas.vacio()==false){
+				cout<<"el valor recuperado es: "<<colas.pop()<<endl;
+			}else{
+				cout<<"la cola se encuetra vacia"<<endl;
+			}
+			break;
+		case 3:
+			colas.mostrarcola();
+			break;
+		}
+	}while(op!=0);
+}
